@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cadastro Seja Madiba</title>
+  <link rel="stylesheet" href="./cadastro.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script src="./inserirHeader.js"></script>
+	<script src="./inserirFooter.js"></script>
+</head>
+
+<!-- header -->
+<div id="header"></div>
+
+<body>
+  <form id="form" method="POST" action="inserir.php" enctype="multipart/form-data">
+
+    <!-- Etapa 1 - Dados pessoais-->
+    <div class="form-step active" id="step-1">
+      <h2>Etapa 1</h2><br>
+      <!-- Projeto -->
+      <label for="projetomadiba">Projeto:</label>
+      <select name="projetomadiba" id="projetomadiba" required>
+        <option value="selecione">Selecione</option>
+        <option value="Gamificacao">Gamificação e Robótica</option>
+        <option value="Cursinho">Cursinho Madiba</option>
+        <option value="IOS">Capacitação Profissional (IOS)</option>
+        <option value="Universidade">Universidade Madiba</option>
+      </select><br>
+
+      <!-- Campo para ser exibido caso seja escolhido Universidade -->
+      <div id="Universidade" style="display: none;">
+        <label for="curso">Qual o curso de interesse?</label>
+        <select name="curso" id="curso" required>
+          <option value="selecione">Selecione</option>
+          <option value="Análise e Desenvolvimento de Sistemas">Análise e Desenvolvimento de Sistemas</option>
+          <option value="Recursos Humanos">Recursos Humanos</option>
+          <option value="Análise de Dados">Análise de Dados</option>
+          <option value="Gestão em Agro Negócio">Gestão em Agro Negócio</option>
+        </select><br>
+      </div>
+
+      <label for="fotoPerfil">Foto de Perfil</label><br>
+      <input type="file" name="fotoPerfil" id="fotoPerfil" accept="image/*"><br>
+
+      <label for="nomeCompleto">Nome completo</label>
+      <input type="text" name="nomeCompleto" id="nomeCompleto" onkeypress=" return somenteLetras(event)" required><br>
+
+      <label for="telefoneCelular">Telefone Celular:</label>
+      <input type="tel" name="telefoneCelular" id="telefoneCelular" maxlength="15" placeholder="(XX) XXXX-XXXX"
+        required><br>
+
+      <label for="telefoneResidencial">Telefone Residencial:</label>
+      <input type="tel" name="telefoneResidencial" id="telefoneResidencial" maxlength="15" placeholder="(XX) XXXX-XXXX"
+        required><br>
+
+      <label for="email">E-mail</label>
+      <input type="email" name="email" id="email" placeholder="Digite seu email" onclick="emailValidate()" required><br>
+      <span class="span-required" id="emalerro" style="display: none; color: #e63636;">Erro no email fornecido, tente novamente!!</span><br>
+
+      <label for="senha">Senha</label>
+      <input type="password" name="senha" id="senha" required><br>
+      <i class="bi bi-eye-fill" id="icons_senha1" onclick="mostrasenhaicons()"></i>
+      </input>
+
+      <label for="confirmaSenha">Confirme a Senha</label> 
+      <input type="password" name="confirmaSenha" id="confirmaSenha" onclick="passwordMatch()" required><br>
+      <i class="bi bi-eye-fill" id="icons_senha2" onclick="mostraconfirmesenhaicons()"></i>
+      <span class="span-required" id="senhaMismatch" style="display: none; color: #e63636;" onclick="passwordMatch()">Senhas devem ser compatíveis</span>
+
+
+      <label for="dataNascimento">Data de Nascimento</label>
+      <input type="date" name="dataNascimento" id="dataNascimento" required><br>
+
+      <label for="idade">Idade</label>
+      <input type="number" name="idade" id="idade" min="5" max="100" required><br>
+      <!--Campos para ser exibido caso seja menor de idade-->
+      <div id="menorIdade" style="display: none;">
+        <label for="cpf1">CPF</label>
+        <input type="text" id="cpf1" name="cpf1" pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$" maxlength="14"
+          oninput="formatarCPF1()" oninput="validarCPF1()" required><br>
+        <label for="certidaoNascimento">Certidão de Nascimento</label>
+        <input type="file" name="certidaoNascimento" id="certidaoNascimento" accept="image/*" required><br>
+      </div>
+
+      <!--Campos para ser exibido caso seja maior de idade-->
+      <div id="maiorIdade" style="display: none;">
+        <label for="cpf2">CPF</label>
+        <input type="text" id="cpf2" name="cpf2" pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$" maxlength="14"
+          oninput="formatarCPF2()" oninput="validarCPF2()" required><br>
+        <label for="rg">RG:</label>
+        <input type="text" name="rg" id="rg" required><br>
+        <label for="rg-frente">Comprovante de RG (frente)</label>
+        <input type="file" name="rg-frente" id="rg-frente" accept="image/*" required><br>
+        <label for="rg-verso">Comprovante de RG (verso)</label>
+        <input type="file" name="rg-verso" id="rg-verso" accept="image/*" required><br>
+        <label for="orgaoExpedidor">Órgão Expedidor:</label>
+        <input type="text" name="orgaoExpedidor" id="orgaoExpedidor" required></label><br>
+        <label for="tituloEleitor">Título de Eleitor:</label>
+        <input type="text" name="tituloEleitor" id="tituloEleitor" required></label><br>
+      </div>
+
+      <label for="sexo">Sexo:</label>
+      <select name="sexo" id="sexo" required>
+        <option value="selecione">Selecione</option>
+        <option value="masculino">Masculino</option>
+        <option value="feminino">Feminino</option>
+      </select><br><br>
+
+      <label for="estadoCivil">Estado Civil:</label>
+      <select name="estadoCivil" id="estadoCivil" required>
+        <option value="solteiro">Selecione</option>
+        <option value="solteiro">Solteiro(a)</option>
+        <option value="casado">Casado(a)</option>
+        <option value="divorciado">Divorciado(a)</option>
+      </select><br>
+      <!--Campos para ser exibido caso seja Casado(a)-->
+      <div id="casado" style="display: none;">
+        <label for="comprovanteCasamento">Certidão de Casamento:</label>
+        <input type="file" name="comprovanteCasamento" id="comprovanteCasamento" accept="image/*" required>
+      </div><br>
+      <br>
+      <button type="button" onclick="nextStep()">Próximo</button>
+    </div>
+
+    <div class="form-step" id="step-2">
+      <h2>Etapa 2</h2><br>
+      <label>Estado:</label>
+      <select name="estado">
+        <option value="MG">MG</option>
+        <option value="SP">SP</option>
+      </select><br>
+      <label>Cidade: </label>
+      <input type="text" name="cidade">
+      <label>Bairro: </label>
+      <input type="text" name="bairro">
+      <label>Rua: </label>
+      <input type="text" name="rua">
+      <label>Número da casa: </label>
+      <input type="text" name="numero">
+      <label>Comprovante de Endereço: </label>
+      <input type="file" name="comprovanteEndereco"><br><br>
+      <button type="button" onclick="prevStep()">Anterior</button>
+      <button type="button" onclick="nextStep()">Próximo</button>
+    </div>
+
+    <div class="form-step" id="step-3">
+      <h2>Etapa 3</h2><br>
+      <label>Escolaridade:</label>
+      <select name="escolaridade" id="escolaridade">
+        <option value="selecione">Selecione</option>
+        <option value="EFCompleto">Ensino Fundamental Completo</option>
+        <option value="EFIncompleto">Ensino Fundamental Incompleto</option>
+        <option value="EMCompleto">Ensino Médio Completo</option>
+        <option value="EMIncompleto">Ensino Médio Incompleto</option>
+      </select><br>
+      <!-- Div que exibe os campos para Ensino Fundamental Completo -->
+      <div id="EFCompleto">
+        <label>Data de conclusão:</label>
+        <input type="date" name="dataConclusao"><br>
+        <label>Instituição de Ensino:</label>
+        <input type="text" name="instituicaoEnsino"><br>
+        <label>Histórico escolar: </label>
+        <input type="file" name="historicoEscolar"><br>
+        <label>Média Escolar: </label>
+        <input type="number" name="mediaEscolar" step="0.01"><br>
+      </div>
+      <!-- Div que exibe os campos para Ensino Fundamental Incompleto -->
+      <div id="EFIncompleto">
+        <label for="serie">Qual série você está estudando ou parou?</label>
+        <select name="serie" id="serie">
+          <option value="selecione">selecione</option>
+          <option value="1ano">1º ano</option>
+          <option value="2ano">2º ano</option>
+          <option value="3ano">3º ano</option>
+          <option value="4ano">4º ano</option>
+          <option value="5ano">5º ano</option>
+          <option value="6ano">6º ano</option>
+          <option value="7ano">7º ano</option>
+          <option value="8ano">8º ano</option>
+          <option value="9ano">9º ano</option>
+        </select><br>
+        <label for="instituicaoEnsino">Instituição de Ensino</label>
+        <input type="text" name="instituicaoEnsino" id="instituicaoEnsino"><br>
+        <label for="historicoEscolar">Histórico escolar</label>
+        <input type="file" name="historicoEscolar" id="historicoEscolar"><br>
+        <label for="mediaEscolar">Média Escolar</label>
+        <input type="number" name="mediaEscolar" id="mediaEscolar" step="0.01"><br>
+      </div>
+      <!-- Div que exibe os campos para Ensino Médio Completo -->
+      <div id="EMCompleto">
+        <label>Data de conclusão: </label>
+        <input type="date" name="dataConclusao">
+        <label for="instituicaoEnsino">Instituição de Ensino: </label>
+        <input type="text" name="instituicaoEnsino" id="instituicaoEnsino"><br>
+        <label for="historicoEscolar">Histórico escolar:</label>
+        <input type="file" name="historicoEscolar" id="historicoEscolar"><br>
+        <label for="mediaEscolar">Média Escolar:</label>
+        <input type="number" name="mediaEscolar" id="mediaEscolar" step="0.01"><br>
+      </div>
+      <!-- Div que exibe os campos para Ensino Médio Incompleto -->
+      <div id="EMIncompleto">
+        <label for="anoletivo">Qual ano letivo você esta estudando ou parou?</label>
+        <select name="anoletivo" id="anoletivo">
+          <option value="selecione">Selecione</option>
+          <option value="1ano">1º ano</option>
+          <option value="2ano">2º ano</option>
+          <option value="3ano">3º ano</option>
+        </select><br>
+        <label for="instituicaoEnsino">Instituição de Ensino:</label>
+        <input type="text" name="instituicaoEnsino" id="instituicaoEnsino"><br>
+        <label for="historicoEscolar">Histórico escolar:</label>
+        <input type="file" name="historicoEscolar" id="historicoEscolar">
+        <label for="mediaEscolar">Média Escolar: </label>
+        <input type="number" name="mediaEscolar" id="mediaEscolar" step="0.01">
+      </div>
+      <!-- Projeto estudantil -->
+      <label>Já Participou de algum projeto estudantil ou social antes?</label>
+      <select name="projeto" id="projeto">
+        <option value="nao">Selecione</option>
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+      </select><br><br>
+      <!-- campo de "Projeto Estudantil" só aparece quando a opção anterior for "Sim" -->
+      <div id="projetoEstudantil">
+        <label>Caso já tenha participado, qual o nome do projeto ou instituição !!</label>
+        <input type="text" name="projetoEstudantil">
+        <br><br>
+      </div>
+      <button type="button" onclick="prevStep()">Anterior</button>
+      <button type="button" onclick="nextStep()">Próximo</button>
+    </div>
+    <div class="form-step" id="step-4">
+      <h2>Etapa 4</h2><br>
+      <label for="tipo-moradia">Tipo de moradia</label>
+      <select id="tipo-moradia" name="tipo-moradia">
+        <option value="selecione">Selecione</option>
+        <option value="propria">Casa Própria</option>
+        <option value="alugada">Alugada</option>
+      </select><br><br>
+      <label for="valor_prestacao">Valor da prestação da moradia</label>
+      <input type="number" name="valor_prestacao" id="valor_prestacao"><br><br>
+      <!-- Programa Social -->
+      <label for="programaSocial">A Família participa ou recebe renda de algum Programa Social?</label>
+      <select name="programaSocial" id="programaSocial">
+        <option value="programaSocialNao">Selecione</option>
+        <option value="programaSocialSim">Sim</option>
+        <option value="programaSocialNao">Não</option>
+      </select>
+      <!--Campo de "Qual o Programa Social?" só aparecer quando a opção anterior for "Sim"-->
+      <div id="nomeProgramaSocial" style="display: none">
+        <label for="nomeProgramaSocial">Qual o Programa Social?</label>
+        <input type="text" name="nomeProgramaSocial" id="nomeProgramaSocial"><br>
+      </div><br>
+
+      <!-- Renda da família -->
+      <label for="renda_familia">Renda total da família</label>
+      <input type="number" id="renda_familia" name="renda_familia"><br>
+
+      <!-- Dificuldade móvel ou financeira -->
+      <label for="dificuldadeFinanceira">A Família lida com algum tipo de dificuldade financeira ou móvel?</label>
+      <select name="dificuldadeFinanceira" id="dificuldadeFinanceira">
+        <option value="selecione">Selecione</option>
+        <option value="dificuldadeFinanceiraSim">Sim</option>
+        <option value="dificuldadeFinanceiraNao">Não</option>
+      </select><br><br>
+      <!--Campo de "Qual a dificuldade?" só aparece quando a opções anterior for "Sim"-->
+      <div id="nomeDificuldade" style="display:none">
+        <label for="nomeDificuldade">Qual a dificuldade?</label>
+        <input type="text" name="nomeDificuldade" id="nomeDificuldade"><br>
+      </div>
+
+      <label for="numero-pessoas">Quantas Pessoas moram na sua casa?</label>
+      <input type="number" name="numero-pessoas" id="numero-pessoas"><br>
+
+      <label for="parentesco">Parentesco</label>
+      <input type="text" name="parentesco" id="parentesco"><br>
+
+      <label for="nome">Nome</label>
+      <input type="text" name="nome" id="nome"><br>
+
+      <label for="idade2">Idade</label>
+      <input type="number" name="idade2" id="idade2"><br>
+
+      <label for="cargo">Cargo:</label>
+      <input type="text" id="cargo" name="cargo"><br>
+
+      <label for="valor_renda">Valor da Renda:</label>
+      <input type="number" id="valor_renda" name="valor_renda"><br>
+
+      <label for="como_soube">Como soube do Instituto Madiba e seus Projetos</label>
+      <select id="como_soube" name="como_soube">
+        <option value="">Selecione</option>
+        <option value="Internet">Alunos do Instituto Madiba</option>
+        <option value="Amigos/Família">Amigos/Família</option>
+        <option value="Mídia">Redes Sociais</option>
+        <option value="Outros">Outros</option>
+      </select><br><br>
+      <label for="descricao">Descrição sobre você e seus objetivos</label>
+      <textarea id="descricao" name="descricao" rows="4" cols="50"></textarea>
+      <br>
+      <button type="button" name="button" onclick="prevStep()">Anterior</button>
+      <input type="button" value="Enviar" onclick="submit()">
+    </div>
+  </form>
+  <script src="./cadastro.js"></script>
+</body>
+<!-- Footer -->
+<div id="footer"></div>
+
+</html>

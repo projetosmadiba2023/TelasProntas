@@ -1,0 +1,170 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* body da página cadastro */
+body {
+	font-family: "Ubuntu", sans-serif;
+	background-color: #F0F0F0;
+}
+
+/* subitituloss */
+h2{
+	border: 1px solid #000000;
+	border-radius: 10px;
+	width: 30rem;
+	text-align: center;
+	margin: 5px 5px;
+}
+
+/* Formulário */
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 30px;
+}
+/* Etapas */
+.form-step {
+  display: none;
+  text-align: center;
+}
+  
+.form-step.active {
+  display: block;
+}
+
+.form-step {
+	display: none;
+}
+.form-step.active {
+	display: block;
+}
+
+label {
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 6px;
+	align-items: center;
+	/* font-weight: bold; */
+}
+
+form i {
+	position: relative;
+	font-size: 18px;
+	left: 13.5rem;
+	top: -2.3rem;
+	cursor: pointer;
+	width: 20px;
+}
+.error {
+	border: 2px solid #e63636;
+}
+
+/*selects*/
+select{
+	width: 30rem;
+	padding: 10px;
+	border-radius: 10px; /*Arredonda os campos*/
+	border-color: #f0f0f01c;
+	height: 40px; /*autura do campo*/
+	margin-bottom: 10px;
+	box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+}
+
+/* inputs */
+input{
+	padding: 10px;
+	border-radius: 10px;/*Arredonda os campos*/
+	border-color: #f0f0f01c;
+	height: 40px; /*autura do campo*/
+	width: 30rem; /*largura do campo*/
+	margin-bottom: 10px;
+	box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+}
+input[type="file"]{
+	padding: 7px;
+	width: 30rem;
+	color: rgb(6, 3, 3);
+	text-align: center;
+	text-decoration: none;
+	border: 2px solid #203370;
+	border-radius: 30px;
+}
+input[type="button"]{
+	padding: 7px 20px;
+	background-color: #203370;
+	border: 2px solid #000000;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 30px;
+	font-size: 16px;
+	width: 9rem;
+}
+
+/* campo de texto como soube */
+textarea{
+	width: 30rem;
+	padding: 20px;
+	border-radius: 10px;
+	border-color: #f0f0f01c;
+	margin-bottom: 10px;
+	box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+}
+
+/* botão de enviar */
+button{
+	padding: 7px 20px;
+	background-color: #203370;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 30px;
+	font-size: 16px;
+	margin-bottom: 2%;
+}
+
+
+@media screen and (max-width: 600px) {
+ 
+	*{
+		padding: 3px;
+	}
+	body{
+		width: auto;
+		height: auto;
+	}
+
+	h2 {
+		width: auto;
+		font-size: 1.5rem;
+	}
+
+	form {
+		padding: 2px;
+	}
+
+	select, input, textarea {
+		width: 90%;
+		font-size: 1rem;
+	}
+
+	input[type="file"] {
+		width: 80%;
+	}
+
+	button {
+		font-size: 1.2rem;
+		margin-bottom: 5%;
+	}
+
+	footer {
+		height: auto;
+		padding: 10px;
+	}
+	form i{
+		left: 9rem;
+	}
+}

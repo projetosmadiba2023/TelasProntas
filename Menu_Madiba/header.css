@@ -1,0 +1,79 @@
+/* header */
+
+* {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 270px;
+	background-color: #203370;
+	padding-bottom: 10px;
+	box-shadow: 0 4px 5px rgba(0, 0, 0, 0.247);
+}
+
+/* logo */
+.logo {
+	border-radius: 100%;
+	border-style: groove;
+	border-color: red;
+	border-width: 5px;
+	width: 180px;
+	height: 180px;
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+}
+
+.logo img {
+	max-width: 40rem;
+	max-height: 14rem;
+}
+
+/* button saiba mais */
+
+.button_SM {
+	color:#13255f;
+	background-color: #FFFFFF;
+	padding: 5px 15px;
+	border-radius: 30px;
+}
+
+.button_SM a {
+	text-decoration: none;
+}
+
+.button_SM:hover {
+	color: #FFFFFF;
+	background-color: #13255f;
+	border: 1px solid #FFFFFF;
+}
+
+@media screen and (max-width: 480px) {
+
+	/* Header */
+	header {
+		height: 160px;
+	}
+
+	/* Logo */
+	.logo {
+		width:  120px;
+		height: 120px;
+	}
+
+	.logo img{
+		max-width: 180px;
+		max-height: 180px;
+	}
+
+	/* Botão "Saiba Mais" */
+	.button_SM {
+		padding: 2px 8px;
+	}
+}
